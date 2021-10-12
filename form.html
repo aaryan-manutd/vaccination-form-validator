@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      color: white;
+      margin: 0;
+      padding: 0;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      background: #34495e;
+    }
+
+    .box {
+      width: 500px;
+      padding: 40px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #191919;
+      text-align: center;
+    }
+
+    .box h1 {
+      color: white;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .box input[type="number"],
+    .box input[type="text"],
+    .box input[type="date"]{
+      background: none;
+      display: inline-block;
+      text-align: center;
+      border: 2px solid #3498db;
+      padding: 14px 10px;
+      width: 200px;
+      outline: none;
+      color: white;
+      border-radius: 24px;
+      transition: 0.25s;
+    }
+
+    input[type="button"]{
+      background: none;
+      display: inline-block;
+      text-align: center;
+      border: 2px solid #2ecc71;
+      padding: 14px 10px;
+      width: 200px;
+      outline: none;
+      color: white;
+      border-radius: 24px;
+      transition: 0.25s;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0;
+    }
+
+    .box input[type="number"]:focus,
+    .box input[type="text"]:focus {
+      width: 280px;
+      border-color: #2ecc71;
+    }
+
+    .box input[type="submit"] {
+      border: 0;
+      background: none;
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      border: 2px solid #2ecc71;
+      padding: 14px 40px;
+      outline: none;
+      color: white;
+      border-radius: 24px;
+      transition: 0.25s;
+      cursor: pointer;
+    }
+
+    .box input[type="submit"]:hover {
+      background: #2ecc71;
+    }
+
+    td{
+      text-align: left;
+    }
+
+    #vax{
+      display: none;
+    }
+
+    #doze{
+      display: none;
+    }
+
+    #submit{
+      display: none;
+    }
+
+  </style>
+  <script>
+    function ageCalculator(){
+      var userinput = document.getElementById("DOB").value;
+
+      var dob = new Date(userinput);  
+      var month_diff = Date.now() - dob.getTime();
+      var age_dt = new Date(month_diff);     
+      var year = age_dt.getUTCFullYear();  
+      var age = Math.abs(year - 1970);        
+      // document.getElementById("result").innerHTML ="Age is: " + age + " years. "; 
+      
+      if(age >= 18){
+        document.getElementById('vax').style.display="table-row";
+        document.getElementById('check').style.display="none";
+      } else{
+        window.alert('You need to be above 18 to be able get vaccinated');
+      }
+    }
+
+    function dozeSelector(){
+      document.getElementById('doze').style.display="table-row";
+    }
+
+    function submitSelector(){
+      document.getElementById('submit').style.display="block";
+    }
+
+  </script>
+
+</head>
+
+<body>
+  <form class="box" action="candidates.html" method="get">
+    <h1>Login</h1>
+    <table style="border-spacing: 25px;">
+      <tr>
+        <td><label>Aadhar card number: </label></td>
+        <td><input type="number" id="aadhar" name="aadhar" pattern="[0-9]" required></td>
+      </tr>
+      <tr>
+        <td><label>Name: </label></td>
+        <td><input type="text" id="name" name="name" maxlength="20" required></td>
+      </tr>
+      <tr>
+        <td><label for="DOB">Date of Birth: </label></td>
+        <td><input type="date" id="DOB" name="date" required></td>
+      </tr>
+      <tr id="vax" onclick="dozeSelector()">
+        <td><label>Which vaccine? </label></td>
+        <td style="text-align: left;">
+          <input type="radio" id="covaxin" name="vaccine" value="covaxin" >
+          <label for="covaxin">Covaxin</label> <br><br>
+          <input type="radio" id="covi" name="vaccine" value="covi">
+          <label for="covi">Covishield</label> <br><br>
+          <input type="radio" id="sputnik" name="vaccine" value="sputnik">
+          <label for="sputnik">Sputnik</label>
+        </td>
+      </tr>
+      <tr id="doze" onclick="submitSelector()">
+        <td><label>Which dose? </label></td>
+        <td style="text-align: left;">
+          <input type="radio" id="num1" name="dose" value="num1" >
+          <label for="num1">1</label> <br><br>
+          <input type="radio" id="num2" name="dose" value="num2">
+          <label for="num2">2</label> <br><br>
+        </td>
+      </tr>
+    </table>
+    <input onclick="ageCalculator()" type="button" name="check" id="check" value="Check">
+    <input type="submit" name="submit" id="submit" value="Register">
+  </form>
+    
+    
+    
+  </form>
+
+  <!-- <h3 id="result" align="center"></h3>   -->
+</body>
+
+</html>
